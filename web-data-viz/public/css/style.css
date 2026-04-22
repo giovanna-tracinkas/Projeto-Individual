@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#div_cadastro{
+    display: flex;
+}
+#div_login{
+    display: flex;
+}
+img{
+    height: 100vh;
+    width: 60vw;
+}
+.div_inputs{
+    padding: 90px;
+    background-color: #120F10;
+    color: white;
+     height: 100vh;
+    width: 40vw;
+     gap: 5px;
+}
+.input_label{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    border: 1px solid rgb(195, 0, 255);
+    border-radius: 10px;
+    padding: 10px;
+}
+button{
+    color: white;
+    background-color: #43264F;
+    padding: 10px;
+    border: none;
+}
+a{
+    text-decoration: none;
+}
