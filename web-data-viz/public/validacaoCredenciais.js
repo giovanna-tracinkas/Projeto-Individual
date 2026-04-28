@@ -159,23 +159,26 @@ function confirmacaoDeSenha() {
 }
 
 function cadastrar() {
-    if (emailFinal == '' || senhaFinal == '' || nomeFinal == '' || senhaConfirmacao == '') {
+    let email = ipt_email.value;
+    let senha = ipt_senha.value;
+    let nome = ipt_nome.value;
+    let confirmacaoSenha = ipt_confirmacao_senha.value;
+
+    if (email == '' || senha == '' || nome == '' || confirmacaoSenha == '') {
         alert(`Por favor, preencha todos os campos para prosseguir.`)
     } else {
-        console.log("FORM LOGIN: ", emailFinal);
-        console.log("FORM SENHA: ", senhaFinal);
-
-        fetch("/usuarios/autenticar", {
+        fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailFinal,
-                senhaServer: senhaFinal
+                nomeServer: nome,
+                emailServer: email,
+                senhaServer: senha
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
+            console.log("ESTOU NO THEN DO CADASTRAR()!")
 
             if (resposta.ok) {
                 console.log(resposta);
@@ -185,17 +188,14 @@ function cadastrar() {
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
                     setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
+                        window.location = "login.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
 
             } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
+                console.log("Houve um erro ao tentar realizar o cadastro!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
