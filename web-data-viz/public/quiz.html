@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/fav.webp" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <title>Quiz | Bring Me The Horizon Brasil</title>
+</head>
+
+<body onload="onloadEsconder(); iniciarQuiz()">
+    <header>
+        <a href="cadastro.html">Cadastro</a>
+        <div id="header-links">
+            <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
+            <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
+            <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
+        </div>
+    </header>
+    <div id="jogo">
+        <div id="placar">
+            <span id="perguntas_restantes">Perguntas restantes:</span>
+        </div>
+        <div id="resultado">
+            <h1>Seu álbum ideal:</h1>
+            <span id="msgFinal"></span>
+        </div>
+
+        <div id="jogo">
+            <div id="infoQuestao">
+                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+                    questões.</span>
+            </div>
+            <div id="perguntaDaQuestaoAtual">
+                <span id="spanQuestaoExibida"></span>
+            </div>
+            <div id="infoAlternativas">
+                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+            </div>
+            <div id="alternativas">
+                <button id="alternativaA" onclick="selecionar('A')"></button>
+                <button id="alternativaB" onclick="selecionar('B')"></button>
+                <button id="alternativaC" onclick="selecionar('C')"></button>
+                <button id="alternativaD" onclick="selecionar('D')"></button>
+                <button id="alternativaE" onclick="selecionar('E')"></button>
+                <button id="alternativaF" onclick="selecionar('F')"></button>
+                <button id="alternativaG" onclick="selecionar('G')"></button>
+            </div>
+            <div id="botoes">
+                <button onclick="submeter()" id="btnSubmeter">Submeter</button>
+                <button onclick="avancar()" id="btnProx" disabled>Avançar</button>
+                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    //Declaração de variáveis de álbuns
+    let sempiternal = 0;
+    let amo = 0;
+    let survivalHorror = 0;
+    let countYourBlessings = 0;
+    let thereIsAHell = 0;
+    let thatsTheSpirit = 0;
+    let nexGen = 0;
+
+    // variáveis globais    
+    let numeroDaQuestaoAtual = 0
+    let opcaoSelecionada = ''
+
+    const listaDeQuestoes = [
+        {
+            pergunta: "Qual estética te agrada mais visualmente?",
+            alternativaA: "Moderno", //Amo
+            alternativaB: "Horror", //Count Your Blessings 
+            alternativaC: "Anime/Virtual Core", //NEx GEn
+            alternativaD: "Minimalismo", //sempiternal
+            alternativaE: "Cyberpunk", //Survival Horror
+            alternativaF: "Soft Grunge", //Thats the spirit
+            alternativaG: "Surrealismo" //There is a hell
+        },
+        {
+            pergunta: "Qual ideia mais te interessa?",
+            alternativaA: "Vida Cotidiana", //Amo
+            alternativaB: "Baderna", //Count Your Blessings
+            alternativaC: "Tecnologia", //NEX GEn
+            alternativaD: "Instrospecção Emocional", //Sempiternal e Thats the spirit
+            alternativaE: "Apocalipse", // Survival Horror
+            alternativaF: "Espiritualismo" //There is as hell
+        },
+        {
+            pergunta: "Como as pessoas te descrevem?",
+            alternativaA: "Sensível", //Amo
+            alternativaB: "Animado", //Count Your Blessings
+            alternativaC: "Peculiar", //NEX GEn 
+            AlternativaD: "Melancólico", //Sempiternal
+            alternativaE: "Ansioso", //Survival Horror
+            alternativaF: "Intenso", //There is a Hell e Thats the spirit
+        }
+    ]
+
+    let quantidadeDeQuestoes = listaDeQuestoes.length
+
+    function onloadEsconder() {
+        document.getElementById('placar').style.display = "none"
+        document.getElementById('resultado').style.display = "none"
+    }
+
+    function iniciarQuiz() {
+        document.getElementById('placar').style.display = "flex"
+        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+
+        preencherHTMLcomQuestaoAtual(0)
+
+        btnSubmeter.disabled = false
+        btnProx.disabled = true
+        // btnConcluir.disabled = true
+        btnTentarNovamente.disabled = true
+    }
+
+    function preencherHTMLcomQuestaoAtual(index) {
+        habilitarAlternativas(true)
+        const questaoAtual = listaDeQuestoes[index]
+        numeroDaQuestaoAtual = index
+        console.log("questaoAtual")
+        console.log(questaoAtual)
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+        document.getElementById("alternativaA").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("alternativaB").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("alternativaC").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("alternativaD").innerHTML = questaoAtual.alternativaD;
+        document.getElementById("alternativaE").innerHTML = questaoAtual.alternativaE;
+        document.getElementById("alternativaF").innerHTML = questaoAtual.alternativaF;
+        document.getElementById("alternativaG").innerHTML = questaoAtual.alternativaG;
+    }
+    function selecionar(opcao) {
+
+        opcaoSelecionada = opcao;
+
+        if (opcao == "A") {
+            survivalHorror++
+        }
+        if (opcao == "B") {
+            countYourBlessings++;
+        }
+        if (opcao == "C") {
+            thereIsAHell++;
+        }
+        if (opcao == "D") {
+            sempiternal++;
+        }
+        if (opcao == "E") {
+            thatsTheSpirit++;
+        }
+        if (opcao == "F") {
+            amo++;
+        }
+        if (opcao == "G") {
+            nexGen++;
+        }
+    }
+
+    function submeter() {
+        if (opcaoSelecionada == "") {
+            alert("Não há alternativas escolhidas. Escolha uma opção.");
+            return;
+        }
+
+        btnSubmeter.disabled = true;
+        btnProx.disabled = false;
+
+        habilitarAlternativas(false);
+    }
+
+    function habilitarAlternativas(trueOrFalse) {
+        let disabled = !trueOrFalse;
+
+        document.getElementById("alternativaA").disabled = disabled;
+        document.getElementById("alternativaB").disabled = disabled;
+        document.getElementById("alternativaC").disabled = disabled;
+        document.getElementById("alternativaD").disabled = disabled;
+        document.getElementById("alternativaE").disabled = disabled;
+        document.getElementById("alternativaF").disabled = disabled;
+        document.getElementById("alternativaG").disabled = disabled;
+    }
+
+    function avancar() {
+        btnProx.disabled = true
+        btnSubmeter.disabled = false
+
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+            numeroDaQuestaoAtual++;
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else {
+            finalizarJogo()
+        }
+    }
+
+    function tentarNovamente() {
+        // atualiza a página
+        window.location.reload()
+    }
+
+
+
+    function finalizarJogo() {
+        let maisVotado = '';
+        let listaAlbuns = [
+            survivalHorror,
+            nexGen,
+            thereIsAHell,
+            amo,
+            thatsTheSpirit,
+            sempiternal,
+            countYourBlessings
+        ]
+
+
+        //JSON: Informações de cada álbum para posterior exibição
+        let informacoesAlbum = [
+            {
+                titulo: 'POST HUMAN: Survival Horror',
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: 'POST HUMAN: NeX GEn',
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: "There Is A Hell, Believe Me Ive Seen It. There Is A Heaven, Let's Keep It A Secret",
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: 'Amo',
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: "That's the Spirit",
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: "Sempiternal",
+                imagem: '',
+                descricao: ''
+            },
+            {
+                titulo: "Count Your Blessings",
+                imagem: '',
+                descricao: ''
+            }
+        ]
+
+        let maiorPontuacao = listaAlbuns[0];
+        let posicao = 0;
+
+        for (let i = 0; i < listaAlbuns.length; i++) {
+            if (listaAlbuns[i] > maiorPontuacao) {
+                maiorPontuacao = listaAlbuns[i];
+                posicao = i;
+            }
+
+        }
+
+        let textoParaMensagemFinal = `${informacoesAlbum[posicao].titulo}`
+
+        document.getElementById('resultado').style.display = "flex"
+        document.getElementById('jogo').style.display = "none"
+        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+
+        btnProx.disabled = true
+        btnSubmeter.disabled = true
+        // btnConcluir.disabled = true
+        btnTentarNovamente.disabled = false
+
+    }
+</script>
