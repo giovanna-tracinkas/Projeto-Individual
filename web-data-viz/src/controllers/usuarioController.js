@@ -9,7 +9,6 @@ function autenticar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-
         usuarioModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {
@@ -19,18 +18,17 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        usuarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
+                        usuarioModel.autenticar(email, senha)
+                            .then((resultadoUsuario) => {
+                                if (resultadoUsuario.length > 0) {
                                     res.json({
                                         id: resultadoAutenticar[0].id,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
-                                        aquarios: resultadoAquarios
                                     });
                                 } else {
-                                    res.status(204).json({ aquarios: [] });
+                                    res.status(204).json({usuarios: [] });
                                 }
                             })
                     } else if (resultadoAutenticar.length == 0) {
