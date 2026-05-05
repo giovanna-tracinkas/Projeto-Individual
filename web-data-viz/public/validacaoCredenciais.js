@@ -1,6 +1,4 @@
 //Variáveis globais usadas na função 'cadastrar()'
-let emailFinal = '';
-let senhaFinal = '';
 let senhaConfirmacao = '';
 let nomeFinal = '';
 
@@ -216,13 +214,53 @@ function logar() {
     let senhaInserida = ipt_senha.value;
 
     if (emailInserido == '' || senhaInserida == '') {
-        alert( 'Preencha todos os campos para prosseguir.')
-    } else if (emailInserido == emailFinal && senhaInserida == senhaFinal) {
-        setTimeout(() => { //Espera 2 segundos antes de direcionar o usuário para tela de dashboard.
-            window.location.href = "Grafico.html"
-        }, 2000);
+        alert('Preencha todos os campos para prosseguir.')
     } else {
-        alert('Credenciais incorretas')
+        console.log("FORM LOGIN: ", emailInserido);
+        console.log("FORM SENHA: ", senhaInserida);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailInserido,
+                senhaServer: senhaInserida
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    setTimeout(function () {
+                        window.location = "quiz.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
     }
 }
 
