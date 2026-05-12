@@ -1,56 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Inicial | Bring Me The Horizon Brasil</title>
-  <link rel="stylesheet" href="../public/css/style.css">
+  <title>Landing Page | Bring Me The Horizon Brasil</title>
+  <link rel="stylesheet" href="../public/css/landing.css">
   <link rel="shortcut icon" href="../public/assets/fav.webp" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body>
-  <div id="div_img_index" class="secao-home">
+  <div class="hero flex">
     <header>
-      <a href="sobre.html">SOBRE</a>
-      <a href="login.html">LOGIN</a>
-      <a href="cadastro.html">CADASTRE-SE</a>
-      <img src="../public/assets/logo.png" alt="">
-      <div class="links">
+      <div>
+        <a href="">Sobre</a>
+        <a href="login.html">Login</a>
+        <a href="cadastro.html">Cadastro</a>
+      </div>
+      <div id="header-links">
         <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
         <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
         <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
         <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
       </div>
     </header>
-    <h1>BRING ME THE HORIZON</h1>
-    <p>Bring Me the Horizon é uma
-      banda britânica de rock, formada
-      em 2004 em Sheffield, South
-      Yorkshire</p>
-  </div>
-  <div id="funcionalidades-info">
-    <div>
-      <div class="card-informacoes-index">Quiz</div>
-      <div class="card-informacoes-index">Dashboard</div>
-      <div class="card-informacoes-index">Sobre</div>
-    </div>
-    <div id="descricao">
-      <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis illum inventore explicabo, aut maxime neque
-        ea perferendis distinctio, soluta dolorem impedit repellendus voluptates voluptas quae odit veritatis, quod
-        nostrum necessitatibus.</p>
+    <div class="hero-content">
+      <h1>BRING ME THE HORIZON</h1>
+      <p>Banda britânica de rock, formada em 2004 em Sheffield, South Yorkshire</p>
+      <button class="btn">Quiz</button>
     </div>
   </div>
-  <footer>
-    <span>BRING ME THE HORIZON BRASIL <i class="bi bi-c-circle"></i> 2026</span>
-    <div class="links">
-      <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
-      <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
-      <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
-      <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
+  <div class="sobre">
+    <h1>SOBRE</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <div id="tabela"></div>
+    <div class="linha">
+      <div class="coluna-titulo">Membros</div>
+      <div class="coluna-conteudo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
+        orem ipsum dolor sit amet
+      </div>
     </div>
+    <hr>
+    <div class="linha">
+      <div class="coluna-titulo">Fundação</div>
+      <div class="coluna-conteudo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
+        orem ipsum dolor sit amet
+      </div>
+    </div>
+    <hr>
+    <div class="linha">
+      <div class="coluna-titulo">Albuns</div>
+      <div class="coluna-conteudo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
+        orem ipsum dolor sit amet
+      </div>
+    </div>
+  </div>
+  <footer class="flex">
+    2026 BRING ME THE HORIZON BRASIL
   </footer>
-
+</body>
 </html>
