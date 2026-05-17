@@ -1,129 +1,221 @@
 /*TUDO*/
-@font-face {
-	font-family: 'proxima_nova_bold';
-	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot');
-	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.woff') format('woff'),
-		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.ttf') format('truetype'),
-		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
-	font-weight: normal;
-	font-style: normal;
-    font: 32px;
-}
+
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+    --roxo-escuro: #7800ac;
+    --cor-titulo-paragrafo: #fff;
+    --imagem-principal: url(../assets/banner.png);
+    --preto: #111;
+    --preto-medio: #24272b;
+    --preto-claro: #2D3135;
+    --roxo-claro: #a855f7;
+    --branco: #fff;
+}
 
 * {
     margin: 0;
     padding: 0;
     font-family: "Inter", sans-serif;
-}
-input {
-    border: 1px solid rgb(195, 0, 255);
-    border-radius: 10px;
-    padding: 10px;
+    box-sizing: border-box;
 }
 
-button {
-    color: white;
-    background-color: #9501d5;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+html {
+    scroll-behavior: smooth;
 }
 
-img {
-    height: 100vh;
-    width: 60vw;
-}
-/*index*/
-#funcionalidades-info{
-    height: 100vh;
-}
-.div_inputs {
-    padding: 90px;
-    background-color: #120F10;
-    color: white;
-    height: 100vh;
-    width: 40vw;
-    gap: 5px;
-}
-
-.input_label {
+/*HEADER*/
+header {
+    width: 100vw;
+    background-color: var(--preto);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px;
+    align-items: center;
+    border-bottom: 1px solid var(--roxo-escuro);
 }
-/* cadastro e login */
+
+.header-links {
+    display: flex;
+    width: 40vw;
+    gap: 40px;
+}
+
+header h1 {
+    color: #a855f7;
+}
+
+i {
+    display: inline-block;
+    transition: transform 1.5s;
+}
+
+i:hover {
+    transform: rotate(360deg);
+}
 
 a {
     text-decoration: none;
     color: #e6e6e6;
 }
 
-a:hover {
-    text-decoration: underline;
-    color: aliceblue;
-    transition: 1.5s;
+/*LANDING*/
+
+.hero {
+    height: 100vh;
+    background-size: cover;
+    background-image: var(--imagem-principal);
+    /*padding: 40px;*/
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-i:hover {
-    transform: rotateY(250deg);
+.hero-text h2 {
+    font-size: 40px;
 }
 
-header {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0px 150px 115px -2px rgba(255, 255, 255, 0.532) inset;
+.hero-text p {
+    margin: 10px 0;
+}
+
+.hero button {
+    padding: 10px 20px;
+    background: #a855f7;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.hero-content {
     padding: 40px;
+    max-width: 500px;
 }
-header img {
-    width: 100px;
-    height: 100px;
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
 }
-.secao-home{
+
+.hero-content p {
+    margin-bottom: 20px;
+}
+
+
+.hero-content button {
+    padding: 12px;
+    background: var(--roxo);
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.hero button:hover {
+    opacity: 0.8;
+}
+
+.sobre {
+    background: var(--preto);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.sobre h1 {
+    margin-bottom: 20px;
+}
+.tabela {
+    width: 80%;
+    margin: 40px auto;
+    color: var(--preto-medio);
+}
+
+.linha {
+    display: flex;
+    padding: 20px 0;
+}
+
+.coluna-titulo {
+    width: 30%;
+    font-weight: bold;
+}
+
+.coluna-conteudo {
+    width: 70%;
+    line-height: 1.6;
+}
+
+hr {
+    border: none;
+    border: 1px solid var(--branco);
+}
+
+/*BODY*/
+body {
+    color: var(--branco);
+    background-color: var(--preto);
+}
+
+
+.subtitulo {
+    color: var(--roxo-escuro);
+    font-family: var(--fonte-subtitulo-paragrafo);
+    font-weight: 300;
+}
+
+
+input {
+    border: 1px solid #191819;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #181818;
+    width: 100%;
+}
+
+button {
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+i button {
+    color: white;
+}
+
+
+.flex {
+    display: flex;
+}
+
+.titulo {
+    font-family: var(--fonte-titulo);
+}
+
+.colunar {
+    flex-direction: column;
+}
+
+.container {
+    padding: 30px;
+    background-color: var(--preto);
+}
+
+.tela-inteira {
     height: 100vh;
     width: 100vw;
 }
 
-#div_img_index {
-    display: flex;
-    flex-direction: column;
-    background-image: url(../assets/MattKean.png);
-    background-size: cover;
-    box-shadow: 0 -350px 200px -50px rgba(255, 255, 255, 0.532) inset;
-    color: white;
-}
-i {
-    color: white;
-}
-i:hover{
-    transform: rotateX('360deg');
-    transition: transform 1.5s;
-}
-h1{
-    font-family: proxima_nova_bold;
-    font-size: 60px;
-}
-.img-membros{
-    border-radius: 300px;
-    height: 300px;
-    width: 300px;
-    transition: transform 1.5s;
-}
-.img-membros:hover{
-    transform: rotate(360deg);
-}
 
-#div_cadastro {
-    display: flex;
-}
 
-#div_login {
-    display: flex;
-}
-footer{
-    display: flex;
+/* FOOTER */
+footer {
+    border-top: 1px solid #5c5c5c;
     gap: 50px;
-    background-color: #1A1A1A;
-    color: #FFFF;
-    padding: 40px;
+    justify-content: center;
+    padding: 60px;
+    background-color: var(--preto);
 }

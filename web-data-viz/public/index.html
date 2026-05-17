@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing Page | Bring Me The Horizon Brasil</title>
-  <link rel="stylesheet" href="../public/css/landing.css">
+  <link rel="stylesheet" href="../public/css/style.css">
   <link rel="shortcut icon" href="../public/assets/fav.webp" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
@@ -12,49 +12,57 @@
 <body>
   <div class="hero flex">
     <header>
-      <div>
-        <a href="">Sobre</a>
-        <a href="login.html">Login</a>
-        <a href="cadastro.html">Cadastro</a>
-      </div>
       <div id="header-links">
         <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
         <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
         <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
         <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
       </div>
+      <div>
+        <a href="#sobre">Sobre</a>
+        <a href="login.html">Login</a>
+        <a href="cadastro.html">Cadastro</a>
+      </div>
     </header>
     <div class="hero-content">
       <h1>BRING ME THE HORIZON</h1>
       <p>Banda britânica de rock, formada em 2004 em Sheffield, South Yorkshire</p>
-      <button class="btn">Quiz</button>
+      <button>Quiz</button>
     </div>
   </div>
-  <div class="sobre">
+  <div class="sobre" id="sobre">
     <h1>SOBRE</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     <div id="tabela"></div>
     <div class="linha">
       <div class="coluna-titulo">Membros</div>
-      <div class="coluna-conteudo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-        orem ipsum dolor sit amet
+      <div class="coluna-conteudo" id="membros">
+        Oliver Sykes
+        Lee Malia
+        Matt Kean
+        Matt Nicholls
       </div>
     </div>
     <hr>
     <div class="linha">
       <div class="coluna-titulo">Fundação</div>
       <div class="coluna-conteudo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-        orem ipsum dolor sit amet
+        Sheffield, South Yorkshire, Inglaterra, 2004
       </div>
     </div>
     <hr>
     <div class="linha">
-      <div class="coluna-titulo">Albuns</div>
+      <div class="coluna-titulo">Gravadoras principais</div>
       <div class="coluna-conteudo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-        orem ipsum dolor sit amet
+        Sony Music, RCA, Columbia Records, 
+        Epitaph Records
+      </div>
+    </div>
+    <hr>
+    <div class="linha">
+      <div class="coluna-titulo">Gêneros</div>
+      <div class="coluna-conteudo"> 	
+Deathcore metalcore post-hardcore metal alternativo rock alternativo rock eletrônico pop rock
       </div>
     </div>
   </div>
@@ -62,4 +70,5 @@
     2026 BRING ME THE HORIZON BRASIL
   </footer>
 </body>
+
 </html>
