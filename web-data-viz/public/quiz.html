@@ -12,7 +12,6 @@
 
 <body onload="onloadEsconder(); iniciarQuiz()">
     <header>
-        <a href="dashboard.html">Dashboard</a>
         <a href="index.html">Sair</a>
         <div id="header-links">
             <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
@@ -120,8 +119,8 @@
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-       
-      
+
+
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -235,6 +234,7 @@
         if (intenso > melancolico) {
             perfilMaiorpontuacao = intenso;
         }
+
         let fkUsuario = sessionStorage.ID_USUARIO;
         let idAlbum = posicao + 1;
 
@@ -258,5 +258,9 @@
         }).catch(erro => {
             console.log("Erro ao salvar quiz:", erro);
         });
+
+        setTimeout(function () {
+            window.location = "../dashboard/dashboard.html";
+        }, 1000);
     }
 </script>
