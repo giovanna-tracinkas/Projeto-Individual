@@ -10,35 +10,28 @@
     <title>Cadastro | Bring Me The Horizon Brasil</title>
 </head>
 
-<body>
-    <div id="div_cadastro">
-        <div class="div_img_cadastro_login">
-            <img src="C:\Users\gitra\Downloads\BMTHVV11-_MAIN-IMAGE_-scaled.jpg"
-                alt="">
-        </div>
-        <div class="div_inputs">
-            <div class="input_label">
-                <label for="ipt_nome">Nome Completo:</label>
-                <input type="text" id="ipt_nome" placeholder="Insira seu nome completo">
+<body class="imagem-principal flex">
+        <div class="formulario flex colunar">
+            <h2>CADASTRE-SE</h2>
+            <div class="inputs flex colunar" id="divNome">
+                <label for="ipt_nome">NOME COMPLETO:</label>
+                <input type="text" id="ipt_nome">
             </div>
-            <div class="input_label">
-                <label for="ipt_email">E-mail:</label>
-                <input type="email" id="ipt_email" placeholder="Insira seu e-mail">
+            <div class="inputs flex colunar">
+                <label for="ipt_email">E-MAIL:</label>
+                <input type="texte" id="ipt_email">
                 <div id="div_verificarEmail"></div>
             </div>
-            <div class="input_label">
-                <label for="ipt_senha">Senha:</label>
-                <input type="password" id="ipt_senha" placeholder="Insira sua senha">
+            <div class="inputs flex colunar">
+                <label for="ipt_senha">SENHA:</label>
+                <input type="password" id="ipt_senha">
             </div>
-            <div class="input_label">
-                <label for="ipt_confirmacao_senha">Confirmação de Senha:</label>
-                <input type="password" id="ipt_confirmacao_senha" placeholder="Insira sua senha">
-            </div>
-            <a href="login.html">Já possui conta?</a>
-            <button onclick="cadastrar()">Cadastrar</button>
-          
+            <button onclick="cadastrar()">CADASTRE-SE</button>
+            <hr>
+            <h3>JÁ POSSUI CONTA?</h3>
+            <button><a href="login.html">ENTRAR</a></button>
+            
         </div>
-    </div>
 </body>
 
 </html>
