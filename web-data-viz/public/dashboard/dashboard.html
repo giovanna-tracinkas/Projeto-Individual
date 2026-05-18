@@ -104,7 +104,7 @@
     function buscarResultado() {
         let fkUsuario = sessionStorage.ID_USUARIO; 
 
-        fetch(`/dashboard/buscarResultado/${fkUsuario}`, {
+        fetch(`/dashboard/buscarAlbum/${fkUsuario}`, {
             method: "GET"
         })
             .then(res => {
