@@ -42,5 +42,6 @@ function buscarAlbum(req, res) {
 }
 
 module.exports = {
-    enviarQuiz
+    enviarQuiz,
+    buscarAlbum
 }

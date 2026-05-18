@@ -8,6 +8,7 @@ function enviarQuiz(fkUsuario, fkAlbum) {
     return database.executar(instrucaoSql);
 };
 
+
 function buscarAlbum(fkUsuario) {
     console.log("ACESSEI A DASHBOARD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarAlbum(): ", fkUsuario)
     var instrucaoSql = `
