@@ -8,7 +8,7 @@ router.post("/enviarQuiz", function (req, res) {
     dashboardController.enviarQuiz(req, res);
 })
 
-router.get("/buscarAlbum", function (req, res) {
+router.get("/buscarAlbum/:fkUsuario", function (req, res) {
     dashboardController.buscarAlbum(req, res);
 })
 

@@ -22,7 +22,7 @@ function enviarQuiz(req, res) {
 }
 
 function buscarAlbum(req, res) {
-    var fkUsuario = req.body.fkUsuarioServer;
+    var fkUsuario = req.params.fkUsuario;
 
     dashboardModel.buscarAlbum(fkUsuario)
         .then(
