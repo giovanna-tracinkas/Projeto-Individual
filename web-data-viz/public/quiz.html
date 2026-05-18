@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/fav.webp" type="image/x-icon">
+    <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <title>Quiz | Bring Me The Horizon Brasil</title>
 </head>
 
 <body onload="onloadEsconder(); iniciarQuiz()">
     <header>
-        <a href="cadastro.html">Cadastro</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="index.html">Sair</a>
         <div id="header-links">
             <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
             <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
@@ -19,16 +21,13 @@
             <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
         </div>
     </header>
-    <div id="jogo">
-        <div id="placar">
+    <div id="jogo" class="flex colunar">
+        <div id="infoTitulo">
+            <p>BRING ME THE HORIZON BRASIL - QUIZ</p>
+            <h1>Qual álbum do Bring Me The Horizon mais combina com você?</h1>
             <span id="perguntas_restantes">Perguntas restantes:</span>
         </div>
-        <div id="resultado">
-            <h1>Seu álbum ideal:</h1>
-            <span id="msgFinal"></span>
-        </div>
-
-        <div id="jogo">
+        <div>
             <div id="infoQuestao">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
@@ -51,8 +50,6 @@
             <div id="botoes">
                 <button onclick="submeter()" id="btnSubmeter">Submeter</button>
                 <button onclick="avancar()" id="btnProx" disabled>Avançar</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
             </div>
 
         </div>
@@ -74,6 +71,10 @@
     let numeroDaQuestaoAtual = 0
     let opcaoSelecionada = ''
 
+    //Perfil emocional
+    let intenso = 0;
+    let melancolico = 0;
+
     const listaDeQuestoes = [
         {
             pergunta: "Qual estética te agrada mais visualmente?",
@@ -88,9 +89,9 @@
         {
             pergunta: "Qual ideia mais te interessa?",
             alternativaA: "Vida Cotidiana", //Amo
-            alternativaB: "Baderna", //Count Your Blessings
+            alternativaB: "Festas", //Count Your Blessings
             alternativaC: "Tecnologia", //NEX GEn
-            alternativaD: "Instrospecção Emocional", //Sempiternal e Thats the spirit
+            alternativaD: "Melancolia", //Sempiternal e Thats the spirit
             alternativaE: "Apocalipse", // Survival Horror
             alternativaF: "Espiritualismo" //There is as hell
         },
@@ -108,20 +109,19 @@
     let quantidadeDeQuestoes = listaDeQuestoes.length
 
     function onloadEsconder() {
-        document.getElementById('placar').style.display = "none"
-        document.getElementById('resultado').style.display = "none"
+        document.getElementById('infoTitulo').style.display = "none"
     }
 
     function iniciarQuiz() {
-        document.getElementById('placar').style.display = "flex"
+        document.getElementById('infoTitulo').style.display = "flex"
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
         preencherHTMLcomQuestaoAtual(0)
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
+       
+      
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -141,29 +141,35 @@
         document.getElementById("alternativaG").innerHTML = questaoAtual.alternativaG;
     }
     function selecionar(opcao) {
-
         opcaoSelecionada = opcao;
 
         if (opcao == "A") {
-            survivalHorror++
+            survivalHorror++;
+            intenso++;
         }
         if (opcao == "B") {
             countYourBlessings++;
+            melancolico++;
         }
         if (opcao == "C") {
             thereIsAHell++;
+            intenso++;
         }
         if (opcao == "D") {
             sempiternal++;
+            melancolico++;
         }
         if (opcao == "E") {
             thatsTheSpirit++;
+            intenso++;
         }
         if (opcao == "F") {
             amo++;
+            intenso++;
         }
         if (opcao == "G") {
             nexGen++;
+            intenso++;
         }
     }
 
@@ -203,15 +209,9 @@
         }
     }
 
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
-
-
-
     function finalizarJogo() {
         let maisVotado = '';
+        let perfilMaiorpontuacao = melancolico;
         let listaAlbuns = [
             survivalHorror,
             nexGen,
@@ -222,67 +222,41 @@
             countYourBlessings
         ]
 
-
-        //JSON: Informações de cada álbum para posterior exibição
-        let informacoesAlbum = [
-            {
-                titulo: 'POST HUMAN: Survival Horror',
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: 'POST HUMAN: NeX GEn',
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: "There Is A Hell, Believe Me Ive Seen It. There Is A Heaven, Let's Keep It A Secret",
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: 'Amo',
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: "That's the Spirit",
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: "Sempiternal",
-                imagem: '',
-                descricao: ''
-            },
-            {
-                titulo: "Count Your Blessings",
-                imagem: '',
-                descricao: ''
-            }
-        ]
-
-        let maiorPontuacao = listaAlbuns[0];
+        let albumMaiorPontuacao = listaAlbuns[0];
         let posicao = 0;
 
         for (let i = 0; i < listaAlbuns.length; i++) {
-            if (listaAlbuns[i] > maiorPontuacao) {
-                maiorPontuacao = listaAlbuns[i];
+            if (listaAlbuns[i] > albumMaiorPontuacao) {
+                albumMaiorPontuacao = listaAlbuns[i];
                 posicao = i;
             }
-
         }
 
-        let textoParaMensagemFinal = `${informacoesAlbum[posicao].titulo}`
+        if (intenso > melancolico) {
+            perfilMaiorpontuacao = intenso;
+        }
+        let fkUsuario = sessionStorage.ID_USUARIO;
+        let idAlbum = posicao + 1;
 
-        document.getElementById('resultado').style.display = "flex"
         document.getElementById('jogo').style.display = "none"
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
 
+
+        fetch("/dashboard/enviarQuiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkUsuarioServer: fkUsuario,
+                fkAlbumServer: idAlbum,
+            })
+        }).then(resposta => {
+            console.log('Quiz salvo');
+        }).catch(erro => {
+            console.log("Erro ao salvar quiz:", erro);
+        });
     }
 </script>

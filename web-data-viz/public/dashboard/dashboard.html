@@ -31,7 +31,7 @@
             <div class="kpis">
                 <div class="kpi gradient-to-right sombra">
                     <p class="titulo">Seu álbum dominante:</p>
-                    <p class="dado">Sempiternal</p>
+                    <p class="dado" id="albumResultado">Sempiternal</p>
                 </div>
                 <div class="kpi gradient-to-left sombra">
                     <p class="titulo">Sua música recomendada:</p>
@@ -53,12 +53,13 @@
         </div>
         <div id="resultado">
             <div id="imagem-resultado"></div>
-            <div id="album"></div>
+            <div id="Resultado"></div>
             <div id="frase"></div>
         </div>
     </div>
 </body>
 <script>
+
     const graficoBarras = document.getElementById('distribuicaoAlbuns');
     const graficoRadar = document.getElementById('perfilEmocional');
 
@@ -99,6 +100,23 @@
         },
     };
     new Chart(graficoRadar, config);
+
+    function buscarResultado(fkUsuario) {
+        let fkUsuario = sessionStorage.ID_USUARIO; 
+
+        fetch(`/dashboard/buscarResultado/${fkUsuario}`, {
+            method: "GET"
+        })
+            .then(res => {
+                res.json().then(json => {
+                    
+                    albumResultado.innerHTML = json[0].titulo
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
 </script>
 
