@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="tela-inteira">
+<body class="tela-inteira" onload="buscarResultado()">
     <header>
         <div id="header-links">
             <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
@@ -26,12 +26,12 @@
         </div>
     </header>
     <div class="flex dashboard">
-        <div id="esquerdo flex colunar">
+        <div id="esquerdo" class="flex colunar">
             <h1>Seus resultados</h1>
             <div class="kpis">
                 <div class="kpi gradient-to-right sombra">
                     <p class="titulo">Seu álbum dominante:</p>
-                    <p class="dado" id="albumResultado">Sempiternal</p>
+                    <p class="dado" id="albumResultado"></p>
                 </div>
                 <div class="kpi gradient-to-left sombra">
                     <p class="titulo">Sua música recomendada:</p>
@@ -53,7 +53,7 @@
         </div>
         <div id="resultado">
             <div id="imagem-resultado"></div>
-            <div id="Resultado"></div>
+            <div id="resultado-album"></div>
             <div id="frase"></div>
         </div>
     </div>
@@ -101,7 +101,7 @@
     };
     new Chart(graficoRadar, config);
 
-    function buscarResultado(fkUsuario) {
+    function buscarResultado() {
         let fkUsuario = sessionStorage.ID_USUARIO; 
 
         fetch(`/dashboard/buscarResultado/${fkUsuario}`, {
