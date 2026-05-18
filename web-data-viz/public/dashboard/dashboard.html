@@ -13,42 +13,49 @@
 
 <body class="tela-inteira">
     <header>
-        <div>
-            <a href="home.html">Home</a>
-            <a href="quiz.html">Quiz</a>
-            <a href="index.html">Sair</a>
-        </div>
         <div id="header-links">
             <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
             <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
             <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
             <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
         </div>
+        <div>
+            <a href="home.html">Home</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="index.html">Sair</a>
+        </div>
     </header>
-    <div class="flex colunar cards">
-        <div class="kpis">
-            <div class="kpi">
-                <p class="titulo">Seu álbum dominante:</p>
-                <p class="dado">Sempiternal</p>
+    <div class="flex dashboard">
+        <div id="esquerdo flex colunar">
+            <h1>Seus resultados</h1>
+            <div class="kpis">
+                <div class="kpi gradient-to-right sombra">
+                    <p class="titulo">Seu álbum dominante:</p>
+                    <p class="dado">Sempiternal</p>
+                </div>
+                <div class="kpi gradient-to-left sombra">
+                    <p class="titulo">Sua música recomendada:</p>
+                    <p class="dado">Shadow Moses</p>
+                </div>
+                <div class="kpi fundo-roxo sombra">
+                    <p class="titulo">Seu perfil emocional:</p>
+                    <p class="dado">Melancólico</p>
+                </div>
             </div>
-            <div class="kpi">
-                <p class="titulo">Sua música recomendada:</p>
-                <p class="dado">Shadow Moses</p>
-            </div>
-            <div class="kpi">
-                <p class="titulo">Seu perfil emocional:</p>
-                <p class="dado">Melancólico</p>
+            <div class="graficos flex">
+                <div class="grafico fundo-padrao sombra">
+                    <canvas id="distribuicaoAlbuns"></canvas>
+                </div>
+                <div class="grafico fundo-padrao sombra">
+                    <canvas id="perfilEmocional"></canvas>
+                </div>
             </div>
         </div>
-        <div class="graficos">
-            <div class="grafico">
-                <canvas id="distribuicaoAlbuns"></canvas>
-            </div>
-            <div class="grafico">
-                <canvas id="perfilEmocional"></canvas>
-            </div>
+        <div id="resultado">
+            <div id="imagem-resultado"></div>
+            <div id="album"></div>
+            <div id="frase"></div>
         </div>
-
     </div>
 </body>
 <script>
@@ -79,9 +86,10 @@
         data: {
             labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
             datasets: [{
-            data: [20, 10, 4, 2]
-        }]
-    },
+                data: [20, 10, 4, 2],
+                backgroundColor: '#a855f7'
+            }]
+        },
         options: {
             elements: {
                 line: {
