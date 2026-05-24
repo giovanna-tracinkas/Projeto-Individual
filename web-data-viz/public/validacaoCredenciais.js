@@ -139,31 +139,14 @@ function verificarSenha() {
     div_verificarSenha.innerHTML = resposta;
 }
 
-function confirmacaoDeSenha() {
-    let senhaInseridaConfirmacao = ipt_confirmacao_senha.value;
-    let resposta = `Confirmado`
-
-    if (senhaFinal == '') {
-        resposta = 'Por favor, preencha primeiro o campo Senha'
-    } else if (senhaInseridaConfirmacao == '') {
-        resposta = 'Por favor, preencha o campo Confirmação de senha'
-    }
-    else if (senhaInseridaConfirmacao != senhaFinal) {
-        resposta = 'Inválido. Senhas diferentes'
-    } else {
-        senhaConfirmacao = senhaInseridaConfirmacao;
-    }
-    div_verificarConfirmacao.innerHTML = resposta;
-}
-
 function cadastrar() {
     let email = ipt_email.value;
     let senha = ipt_senha.value;
     let nome = ipt_nome.value;
-    let confirmacaoSenha = ipt_confirmacao_senha.value;
 
-    if (email == '' || senha == '' || nome == '' || confirmacaoSenha == '') {
-        alert(`Por favor, preencha todos os campos para prosseguir.`)
+    if (nome == '' || senha == '' || nome == '') {
+        /* divNome.innerHTML += `<span> Insira um nome válido</span>`*/
+        alert(`Por favor, preencha todos os campos para prosseguir.`) 
     } else {
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -245,7 +228,6 @@ function logar() {
                     }, 1000); // apenas para exibir o loading
 
                 });
-
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
