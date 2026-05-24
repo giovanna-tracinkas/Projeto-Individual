@@ -10,7 +10,7 @@
     <title>Quiz | Bring Me The Horizon Brasil</title>
 </head>
 
-<body onload="onloadEsconder(); iniciarQuiz()">
+<body onload="iniciarQuiz()">
     <header>
         <a href="index.html">Sair</a>
         <div id="header-links">
@@ -37,14 +37,7 @@
             <div id="infoAlternativas">
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
-            <div id="alternativas">
-                <button id="alternativaA" onclick="selecionar('A')"></button>
-                <button id="alternativaB" onclick="selecionar('B')"></button>
-                <button id="alternativaC" onclick="selecionar('C')"></button>
-                <button id="alternativaD" onclick="selecionar('D')"></button>
-                <button id="alternativaE" onclick="selecionar('E')"></button>
-                <button id="alternativaF" onclick="selecionar('F')"></button>
-                <button id="alternativaG" onclick="selecionar('G')"></button>
+            <div id="div_alternativas">
             </div>
             <div id="botoes">
                 <button onclick="submeter()" id="btnSubmeter">Submeter</button>
@@ -57,148 +50,200 @@
 
 </html>
 <script>
-    //Declaração de variáveis de álbuns
-    let sempiternal = 0;
-    let amo = 0;
-    let survivalHorror = 0;
-    let countYourBlessings = 0;
-    let thereIsAHell = 0;
-    let thatsTheSpirit = 0;
-    let nexGen = 0;
+    // Declaração de variáveis de álbuns
+    let pontuacaoAlbuns = {
+        sempiternal: 0,
+        amo: 0,
+        survivalHorror: 0,
+        thereIsAHell: 0,
+        thatsTheSpirit: 0,
+        nexGen: 0
+    }
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
-    let opcaoSelecionada = ''
+    let opcaoSelecionada = null
 
     //Perfil emocional
-    let intenso = 0;
     let melancolico = 0;
+    let animado = 0;
+    let ansioso = 0;
 
     const listaDeQuestoes = [
         {
             pergunta: "Qual estética te agrada mais visualmente?",
-            alternativaA: "Moderno", //Amo
-            alternativaB: "Horror", //Count Your Blessings 
-            alternativaC: "Anime/Virtual Core", //NEx GEn
-            alternativaD: "Minimalismo", //sempiternal
-            alternativaE: "Cyberpunk", //Survival Horror
-            alternativaF: "Soft Grunge", //Thats the spirit
-            alternativaG: "Surrealismo" //There is a hell
+            alternativas: [
+                {
+                    texto: "Cyberpunk",
+                    album1: "survivalHorror",
+                    perfil: "ansioso"
+                },
+                {
+                    texto: "Surrealismo",
+                    album1: "thereIsAHell",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Grunge",
+                    album1: "sempiternal",
+                    album2: "thatsTheSpirit",
+                    album3: "amo",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Anime/Virtual",
+                    album1: "nexGen",
+                    perfil: "animado"
+                },
+            ]
         },
         {
-            pergunta: "Qual ideia mais te interessa?",
-            alternativaA: "Vida Cotidiana", //Amo
-            alternativaB: "Festas", //Count Your Blessings
-            alternativaC: "Tecnologia", //NEX GEn
-            alternativaD: "Melancolia", //Sempiternal e Thats the spirit
-            alternativaE: "Apocalipse", // Survival Horror
-            alternativaF: "Espiritualismo" //There is as hell
+            pergunta: "O que mais prende sua atenção?",
+            alternativas: [
+                {
+                    texto: "Tecnologia",
+                    album1: "nexGen",
+                    perfil: "animado"
+                },
+                {
+                    texto: "Surrealismo",
+                    album1: "thereIsAHell",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Apocalipse",
+                    album1: "survivalHorror",
+                    perfil: "ansioso"
+                },
+                {
+                    texto: "Vida cotidiana",
+                    album1: "sempiternal",
+                    album2: "thatsTheSpirit",
+                    album3: "amo",
+                    perfil: "melancolico"
+                }
+            ]
         },
         {
             pergunta: "Como as pessoas te descrevem?",
-            alternativaA: "Sensível", //Amo
-            alternativaB: "Animado", //Count Your Blessings
-            alternativaC: "Peculiar", //NEX GEn 
-            AlternativaD: "Melancólico", //Sempiternal
-            alternativaE: "Ansioso", //Survival Horror
-            alternativaF: "Intenso", //There is a Hell e Thats the spirit
+            alternativas: [
+                {
+                    texto: "Sensível",
+                    album1: "amo",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Ansioso",
+                    album1: "survivalHorror",
+                    perfil: "ansioso"
+                },
+                {
+                    texto: "Melancólico",
+                    album1: "sempiternal",
+                    album2: "thereIsAHell",
+                    album3: "thatsTheSpirit",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Enérgico",
+                    album1: "nexGen",
+                    perfil: "animado"
+                },
+            ]
+        },
+        {
+            pergunta: "Como você age quando não está bem emocionalmente?",
+            alternativas: [
+                {
+                    texto: "Me isolo",
+                    album1: "amo",
+                    album2: "sempiternal",
+                    album3: "thereIsAHell",
+                    perfil: "melancolico"
+                },
+                {
+                    texto: "Jogo ou escuto música",
+                    album2: "nexGen",
+                    perfil: "ansioso"
+                },
+                {
+                    texto: "Tento transformar em motivação",
+                    album1: "thatsTheSpirit",
+                    album2: "survivalHorror",
+                    perfil: "animado"
+                },
+            ]
         }
     ]
 
     let quantidadeDeQuestoes = listaDeQuestoes.length
 
-    function onloadEsconder() {
-        document.getElementById('infoTitulo').style.display = "none"
-    }
-
     function iniciarQuiz() {
         document.getElementById('infoTitulo').style.display = "flex"
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
-
         preencherHTMLcomQuestaoAtual(0)
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-
-
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
-        habilitarAlternativas(true)
-        const questaoAtual = listaDeQuestoes[index]
+        const questaoAtual = listaDeQuestoes[index];
         numeroDaQuestaoAtual = index
         console.log("questaoAtual")
         console.log(questaoAtual)
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("alternativaA").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("alternativaB").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("alternativaC").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("alternativaD").innerHTML = questaoAtual.alternativaD;
-        document.getElementById("alternativaE").innerHTML = questaoAtual.alternativaE;
-        document.getElementById("alternativaF").innerHTML = questaoAtual.alternativaF;
-        document.getElementById("alternativaG").innerHTML = questaoAtual.alternativaG;
+        div_alternativas.innerHTML = "";
+
+        for (let i = 0; i < questaoAtual.alternativas.length; i++) {
+            div_alternativas.innerHTML += ` <button id="botao${i}" onclick="selecionar(${i})">
+            ${questaoAtual.alternativas[i].texto} </button>
+    `;
+        }
     }
+
     function selecionar(opcao) {
         opcaoSelecionada = opcao;
-
-        if (opcao == "A") {
-            survivalHorror++;
-            intenso++;
-        }
-        if (opcao == "B") {
-            countYourBlessings++;
-            melancolico++;
-        }
-        if (opcao == "C") {
-            thereIsAHell++;
-            intenso++;
-        }
-        if (opcao == "D") {
-            sempiternal++;
-            melancolico++;
-        }
-        if (opcao == "E") {
-            thatsTheSpirit++;
-            intenso++;
-        }
-        if (opcao == "F") {
-            amo++;
-            intenso++;
-        }
-        if (opcao == "G") {
-            nexGen++;
-            intenso++;
-        }
     }
 
     function submeter() {
-        if (opcaoSelecionada == "") {
+        if (opcaoSelecionada === "") {
             alert("Não há alternativas escolhidas. Escolha uma opção.");
             return;
+        } else {
+            let alternativaEscolhida = listaDeQuestoes[numeroDaQuestaoAtual].alternativas[opcaoSelecionada];
+            pontuacaoAlbuns[alternativaEscolhida.album1]++;
+
+            if (alternativaEscolhida.album2 != undefined) {
+                pontuacaoAlbuns[alternativaEscolhida.album2]++;
+            }
+
+            if (alternativaEscolhida.album3 != undefined) {
+                pontuacaoAlbuns[alternativaEscolhida.album3]++;
+            }
+
+            if (alternativaEscolhida.perfil == "melancolico") {
+                melancolico++;
+            } else if (alternativaEscolhida.perfil == "animado") {
+                animado++;
+            } else if (alternativaEscolhida.perfil == "ansioso") {
+                ansioso++;
+            }
+            for (let i = 0; i < listaDeQuestoes[numeroDaQuestaoAtual].alternativas.length; i++) {
+                document.getElementById("botao" + i).disabled = true;
+            }
         }
 
         btnSubmeter.disabled = true;
         btnProx.disabled = false;
-
-        habilitarAlternativas(false);
-    }
-
-    function habilitarAlternativas(trueOrFalse) {
-        let disabled = !trueOrFalse;
-
-        document.getElementById("alternativaA").disabled = disabled;
-        document.getElementById("alternativaB").disabled = disabled;
-        document.getElementById("alternativaC").disabled = disabled;
-        document.getElementById("alternativaD").disabled = disabled;
-        document.getElementById("alternativaE").disabled = disabled;
-        document.getElementById("alternativaF").disabled = disabled;
-        document.getElementById("alternativaG").disabled = disabled;
     }
 
     function avancar() {
+        opcaoSelecionada = null;
         btnProx.disabled = true
         btnSubmeter.disabled = false
+
 
         if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
             numeroDaQuestaoAtual++;
@@ -209,34 +254,43 @@
     }
 
     function finalizarJogo() {
-        let maisVotado = '';
-        let perfilMaiorpontuacao = melancolico;
         let listaAlbuns = [
-            survivalHorror,
-            nexGen,
-            thereIsAHell,
-            amo,
-            thatsTheSpirit,
-            sempiternal,
-            countYourBlessings
+            pontuacaoAlbuns.survivalHorror,
+            pontuacaoAlbuns.nexGen,
+            pontuacaoAlbuns.thereIsAHell,
+            pontuacaoAlbuns.amo,
+            pontuacaoAlbuns.thatsTheSpirit,
+            pontuacaoAlbuns.sempiternal
         ]
 
+        let nomesAlbuns = [
+            "Survival Horror",
+            "neX GEn",
+            "There Is A Hell",
+            "Amo",
+            "Thats The Spirit",
+            "Sempiternal",
+        ];
+
+        let albumMaisVotado = nomesAlbuns[0];
         let albumMaiorPontuacao = listaAlbuns[0];
-        let posicao = 0;
+        let perfilMaiorpontuacao = melancolico;
 
         for (let i = 0; i < listaAlbuns.length; i++) {
             if (listaAlbuns[i] > albumMaiorPontuacao) {
                 albumMaiorPontuacao = listaAlbuns[i];
-                posicao = i;
+                albumMaisVotado = nomesAlbuns[i];
             }
         }
 
-        if (intenso > melancolico) {
-            perfilMaiorpontuacao = intenso;
+        if (ansioso > perfilMaiorpontuacao) {
+            perfilMaiorpontuacao = ansioso;
+        }
+        if (animado > perfilMaiorpontuacao) {
+            perfilMaiorpontuacao = animado;
         }
 
         let fkUsuario = sessionStorage.ID_USUARIO;
-        let idAlbum = posicao + 1;
 
         document.getElementById('jogo').style.display = "none"
 
@@ -251,7 +305,7 @@
             },
             body: JSON.stringify({
                 fkUsuarioServer: fkUsuario,
-                fkAlbumServer: idAlbum,
+                nomeAlbumServer: albumMaisVotado
             })
         }).then(resposta => {
             console.log('Quiz salvo');
@@ -263,4 +317,5 @@
             window.location = "../dashboard/dashboard.html";
         }, 1000);
     }
+
 </script>
