@@ -163,7 +163,7 @@
                 },
                 {
                     texto: "Jogo ou escuto música",
-                    album2: "nexGen",
+                    album1: "nexGen",
                     perfil: "ansioso"
                 },
                 {
@@ -208,7 +208,7 @@
     }
 
     function submeter() {
-        if (opcaoSelecionada === "") {
+        if (opcaoSelecionada == null) {
             alert("Não há alternativas escolhidas. Escolha uma opção.");
             return;
         } else {
@@ -274,7 +274,7 @@
 
         let albumMaisVotado = nomesAlbuns[0];
         let albumMaiorPontuacao = listaAlbuns[0];
-        let perfilMaiorpontuacao = melancolico;
+        let perfilResultado = "melancolico";
 
         for (let i = 0; i < listaAlbuns.length; i++) {
             if (listaAlbuns[i] > albumMaiorPontuacao) {
@@ -283,13 +283,13 @@
             }
         }
 
-        if (ansioso > perfilMaiorpontuacao) {
-            perfilMaiorpontuacao = ansioso;
+        if (ansioso > melancolico && ansioso > animado) {
+            perfilResultado = "ansioso";
+        } else if (animado > melancolico && animado > ansioso) {
+            perfilResultado = "animado";
+        } else {
+            perfilResultado = "melancolico";
         }
-        if (animado > perfilMaiorpontuacao) {
-            perfilMaiorpontuacao = animado;
-        }
-
         let fkUsuario = sessionStorage.ID_USUARIO;
 
         document.getElementById('jogo').style.display = "none"
@@ -297,6 +297,9 @@
         btnProx.disabled = true
         btnSubmeter.disabled = true
 
+        console.log(fkUsuario);
+        console.log(albumMaisVotado);
+        console.log(perfilResultado);
 
         fetch("/dashboard/enviarQuiz", {
             method: "POST",
@@ -305,17 +308,15 @@
             },
             body: JSON.stringify({
                 fkUsuarioServer: fkUsuario,
-                nomeAlbumServer: albumMaisVotado
+                nomeAlbumServer: albumMaisVotado,
+                perfilServer: perfilResultado
             })
         }).then(resposta => {
             console.log('Quiz salvo');
+            window.location = "../dashboard/dashboard.html";
         }).catch(erro => {
             console.log("Erro ao salvar quiz:", erro);
         });
-
-        setTimeout(function () {
-            window.location = "../dashboard/dashboard.html";
-        }, 1000);
     }
 
 </script>
