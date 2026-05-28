@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title> Login | Bring Me The Horizon Brasil</title>
     <link rel="shortcut icon" href="assets/fav.webp" type="image/x-icon">
     <script src="validacaoCredenciais.js"></script>
@@ -14,18 +14,18 @@
 <body class="imagem-principal flex">
     <div class="formulario flex colunar">
             <h2>ENTRAR</h2>
-            <div class="inputs flex colunar" >
+            <div class="inputs flex colunar">
                 <label for="ipt_email">E-MAIL:</label>
-                <input type="email" id="ipt_email">
+                <input type="text" id="ipt_email">
             </div>
             <div class="inputs flex colunar" >
                 <label for="ipt_senha">SENHA:</label>
-                <input type="password" id="ipt_senha">
+                <input type="text" id="ipt_senha">
             </div>
             <button onclick="logar()">ENTRAR</button>
             <hr>
             <h3>AINDA NÃO POSSUI CONTA?</h3>
-            <button href="cbuttondastro.html">CADASTRAR</button>
+            <button><a href="cadastro.html">CADASTRAR</a></button>
         </div>
     </div>
 </body>
