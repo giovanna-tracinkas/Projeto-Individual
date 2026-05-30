@@ -11,76 +11,51 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="tela-inteira" onload="buscarResultado()">
+<body class="tela-inteira" onload="buscarResultado(), carregarGrafico()">
     <header>
+        <div>
+            <a href="home.html">HOME</a>
+            <a href="quiz.html">QUIZ</a>
+            <a href="../index.html">SAIR</a>
+        </div>
         <div id="header-links">
             <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
             <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
             <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
             <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
         </div>
-        <div>
-            <a href="home.html">Home</a>
-            <a href="quiz.html">Quiz</a>
-            <a href="index.html">Sair</a>
-        </div>
     </header>
-    <div class="flex dashboard">
-        <div id="esquerdo" class="flex colunar">
-            <h1>Seus resultados</h1>
-            <div class="kpis">
-                <div class="kpi gradient-to-right sombra">
-                    <p class="titulo">Seu álbum dominante:</p>
-                    <p class="dado" id="albumResultado"></p>
-                </div>
-                <div class="kpi gradient-to-left sombra">
-                    <p class="titulo">Sua música recomendada:</p>
-                    <p class="dado">Shadow Moses</p>
-                </div>
-                <div class="kpi fundo-roxo sombra">
-                    <p class="titulo">Seu perfil emocional:</p>
-                    <p class="dado">Melancólico</p>
-                </div>
+    <div class="flex colunar dashboard">
+        <h1>Seus resultados</h1>
+        <div class="kpis">
+            <div class="kpi gradient-to-right sombra">
+                <p class="titulo">Seu álbum dominante:</p>
+                <p class="dado" id="albumResultado"></p>
             </div>
-            <div class="graficos flex">
-                <div class="grafico fundo-padrao sombra">
-                    <canvas id="distribuicaoAlbuns"></canvas>
-                </div>
-                <div class="grafico fundo-padrao sombra">
-                    <canvas id="perfilEmocional"></canvas>
-                </div>
+            <div class="kpi gradient-to-left sombra">
+                <p class="titulo">Sua música recomendada:</p>
+                <p class="dado" id="musicaResultado"></p>
+            </div>
+            <div class="kpi fundo-roxo sombra">
+                <p class="titulo">Seu perfil emocional:</p>
+                <p class="dado" id="perfilEmocionalResultado"></p>
             </div>
         </div>
-        <div id="resultado">
-            <div id="imagem-resultado"></div>
-            <div id="resultado-album"></div>
-            <div id="frase"></div>
+        <div class="graficos flex">
+            <div class="grafico fundo-padrao sombra">
+                <canvas id="distribuicaoAlbuns"></canvas>
+            </div>
+            <div class="grafico fundo-padrao sombra">
+                <canvas id="perfilEmocional"></canvas>
+            </div>
         </div>
+
     </div>
 </body>
 <script>
-
-    const graficoBarras = document.getElementById('distribuicaoAlbuns');
+    let fkUsuario = sessionStorage.ID_USUARIO;
+    const graficoRosca = document.getElementById('distribuicaoAlbuns');
     const graficoRadar = document.getElementById('perfilEmocional');
-
-    new Chart(graficoBarras, {
-        type: 'doughnut',
-        data: {
-            labels: ['Sempiternal', 'Amo', 'Thats The Spirit', 'Count Your Blessings', 'There Is A Hell'],
-            datasets: [{
-                label: 'Compatibilidade por álbum',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
     const config = {
         type: 'radar',
@@ -102,15 +77,14 @@
     new Chart(graficoRadar, config);
 
     function buscarResultado() {
-        let fkUsuario = sessionStorage.ID_USUARIO; 
-
         fetch(`/dashboard/buscarAlbum/${fkUsuario}`, {
             method: "GET"
         })
             .then(res => {
                 res.json().then(json => {
-                    
-                    albumResultado.innerHTML = json[0].titulo
+                    albumResultado.innerHTML = json[0].album;
+                    musicaResultado.innerHTML = json[0].musica;
+                    perfilEmocionalResultado.innerHTML = json[0].perfil;
                 })
             })
             .catch(err => {
@@ -118,6 +92,39 @@
             })
     }
 
+
+
+    function carregarGrafico() {
+        fetch(`/dashboard/compatibilidadeAlbum/${fkUsuario}`, {
+            method: "GET"
+        })
+            .then(res => {
+                res.json().then(json => {
+                    console.log(json);
+
+                    let dados = json[0];
+
+                    new Chart(graficoRosca, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Sempiternal', 'Amo', 'Survival Horror', 'There Is A Hell', 'Thats The Spirit', 'Nex GEn'],
+                            datasets: [{
+                                data: [dados.sempiternal,
+                                dados.amo,
+                                dados.survivalHorror,
+                                dados.thereIsAHell,
+                                dados.thatsTheSpirit,
+                                dados.nexGen
+                                ]
+                            }]
+                        }
+                    });
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 </script>
 
 </html>
