@@ -24,6 +24,11 @@ html {
     scroll-behavior: smooth;
 }
 
+hr {
+    border: none;
+    border: 1px solid var(--branco);
+}
+
 /*HEADER*/
 header {
     width: 100vw;
@@ -40,6 +45,11 @@ header {
     display: flex;
     width: 40vw;
     gap: 40px;
+}
+
+#secoes{
+    display: flex;
+    gap: 15px;
 }
 
 header h1 {
@@ -66,11 +76,18 @@ a {
     height: 100vh;
     background-size: cover;
     background-image: var(--imagem-principal);
-    /*padding: 40px;*/
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.hero-con button {
+    padding: 10px 20px;
+    background: #07000d;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 
 .hero-text h2 {
@@ -81,18 +98,11 @@ a {
     margin: 10px 0;
 }
 
-.hero button {
-    padding: 10px 20px;
-    background: #a855f7;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
 
 .hero-content {
     padding: 40px;
     max-width: 500px;
+    align-self: flex-end;
 }
 
 .hero-content h1 {
@@ -105,32 +115,28 @@ a {
 }
 
 
-.hero-content button {
-    padding: 12px;
-    background: var(--roxo);
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
 .hero button:hover {
     opacity: 0.8;
 }
 
 .sobre {
     background: var(--preto);
-    padding: 60px 20px;
-    text-align: center;
+    padding: 60px 90px;
+    text-align: justify;
+    gap: 30px;
 }
+
+#contexto {
+    width: 40vw;
+}
+
 
 .sobre h1 {
     margin-bottom: 20px;
 }
-.tabela {
-    width: 80%;
-    margin: 40px auto;
-    color: var(--preto-medio);
+
+#tabela {
+    width: 50vw;
 }
 
 .linha {
@@ -148,9 +154,59 @@ a {
     line-height: 1.6;
 }
 
-hr {
-    border: none;
-    border: 1px solid var(--branco);
+/*CADASTRO E LOGIN*/
+.img-formulario {
+    width: 75vw;
+    height: 100vh;
+    background-image: var(--imagem-principal);
+    background-size: cover;
+  
+}
+
+
+.formulario {
+    padding: 30px;
+    background-color: #2D3135;
+    height: 100vh;
+    width: 25vw;
+    border: 1px solid #24272b;
+}
+
+.botoes{
+    margin-top: 20px;
+    text-align: center;
+    gap: 20px;
+}
+
+
+.login-cadastro{
+    align-items: center;
+}
+
+label {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    line-height: 12px;
+    font-weight: 800;
+}
+
+.inputs {
+    gap: 7px;
+    margin-top: 15px;
+}
+
+input {
+    padding: 16px 21px;
+    border-radius: 3px;
+    background-color: #24272b;
+    border: 1px solid #2D3135;
+    color: var(--branco);
+}
+
+h3 {
+    font-size: 26px;
+    line-height: 32px;
+
 }
 
 /*BODY*/
@@ -159,27 +215,16 @@ body {
     background-color: var(--preto);
 }
 
-
-.subtitulo {
-    color: var(--roxo-escuro);
-    font-family: var(--fonte-subtitulo-paragrafo);
-    font-weight: 300;
-}
-
-
-input {
-    border: 1px solid #191819;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #181818;
-    width: 100%;
-}
-
 button {
+    cursor: pointer;
     color: white;
-    border-radius: 5px;
+    border-radius: 30px;
     border: none;
     font-weight: bold;
+    background-color: var(--roxo-claro);
+    text-align: center;
+    width: 100%;
+    padding: 12px 45px 14px;
 }
 
 i button {
@@ -205,10 +250,71 @@ i button {
 }
 
 .tela-inteira {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 
+/*DASHBOARD*/
+
+.gradient-to-left {
+    background: linear-gradient(218deg, rgba(119, 0, 143, 1) 0%, rgba(134, 87, 199, 1) 50%, rgba(255, 128, 249, 1) 100%);
+}
+
+.gradient-to-right {
+    background: linear-gradient(50deg, rgba(119, 0, 143, 1) 0%, rgba(134, 87, 199, 1) 35%, rgba(255, 128, 249, 1) 100%);
+}
+
+.fundo-roxo {
+    background-color: rgba(119, 0, 143, 1);
+}
+
+.fundo-padrao {
+    background-color: var(--preto-medio);
+}
+
+.dashboard {
+    gap: 20px;
+    height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+.graficos {
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.grafico {
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sombra {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.kpis {
+    display: flex;
+    height: 15vh;
+    gap: 25px;
+}
+
+.kpi {
+    display: flex;
+    flex-direction: column;
+    padding: 27px;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
 
 
 /* FOOTER */
