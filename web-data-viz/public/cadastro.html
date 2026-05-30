@@ -7,31 +7,38 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="assets/fav.webp" type="image/x-icon">
     <script src="validacaoCredenciais.js"></script>
-    <title>Cadastro | Bring Me The Horizon Brasil</title>
+    <title>Cadastre-se | Bring Me The Horizon Brasil</title>
 </head>
 
-<body class="imagem-principal flex">
-        <div class="formulario flex colunar">
+<body class="flex">
+    <div class="flex tela-inteira login-cadastro">
+        <div class="formulario sombra flex colunar">
             <h2>CADASTRE-SE</h2>
             <div class="inputs flex colunar" id="divNome">
                 <label for="ipt_nome">NOME COMPLETO:</label>
-                <input type="text" id="ipt_nome">
+                <input type="text" id="ipt_nome" oninput="verificarNome()">
+                <div id="div_verificarNome"></div>
             </div>
             <div class="inputs flex colunar">
                 <label for="ipt_email">E-MAIL:</label>
-                <input type="texte" id="ipt_email">
+                <input type="texte" id="ipt_email" oninput="validarEmail()">
                 <div id="div_verificarEmail"></div>
             </div>
             <div class="inputs flex colunar">
                 <label for="ipt_senha">SENHA:</label>
-                <input type="password" id="ipt_senha">
+                <input type="password" id="ipt_senha" oninput="verificarSenha()">
+                <div id="div_verificarSenha"></div>
             </div>
-            <button onclick="cadastrar()">CADASTRE-SE</button>
-            <hr>
-            <h3>JÁ POSSUI CONTA?</h3>
-            <button><a href="login.html">ENTRAR</a></button>
-            
+            <div class="botoes flex colunar">
+                <button onclick="cadastrar()">CADASTRE-SE</button>
+                <hr>
+                <h3>Já possui uma conta?</h3>
+                <button><a href="login.html">ENTRAR</a></button>
+            </div>
         </div>
+        <div class="img-formulario"></div>
+    </div>
+    </div>
 </body>
 
 </html>

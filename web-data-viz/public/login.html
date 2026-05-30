@@ -11,22 +11,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<body class="imagem-principal flex">
-    <div class="formulario flex colunar">
+<body>
+    <div class="flex tela-inteira login-cadastro">
+        <div class="formulario sombra flex colunar">
             <h2>ENTRAR</h2>
             <div class="inputs flex colunar">
                 <label for="ipt_email">E-MAIL:</label>
                 <input type="text" id="ipt_email">
             </div>
-            <div class="inputs flex colunar" >
+            <div class="inputs flex colunar">
                 <label for="ipt_senha">SENHA:</label>
                 <input type="text" id="ipt_senha">
             </div>
-            <button onclick="logar()">ENTRAR</button>
-            <hr>
-            <h3>AINDA NÃO POSSUI CONTA?</h3>
-            <button><a href="cadastro.html">CADASTRAR</a></button>
+            <div class="botoes flex colunar">
+                <button onclick="logar()">ENTRAR</button>
+                <hr>
+                <h3>Ainda não possui conta?</h3>
+                <button><a href="cadastro.html">CADASTRAR</a></button>
+            </div>
         </div>
+        <div class="img-formulario"></div>
     </div>
 </body>
+
 </html>
