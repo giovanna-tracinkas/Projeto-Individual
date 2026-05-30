@@ -12,5 +12,8 @@ router.get("/buscarAlbum/:fkUsuario", function (req, res) {
     dashboardController.buscarAlbum(req, res);
 })
 
+router.get("/compatibilidadeAlbum/:fkUsuario", function(req, res) {
+    dashboardController.compatibilidadeAlbum(req, res);
+});
 
 module.exports = router;
