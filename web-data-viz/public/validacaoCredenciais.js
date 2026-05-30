@@ -1,11 +1,12 @@
 //Variáveis globais usadas na função 'cadastrar()'
-let senhaConfirmacao = '';
 let nomeFinal = '';
+let emailFinal = '';
+let senhaFinal = '';
 
 function validarEmail() {
     let emailInserido = ipt_email.value;
     let emailMinusculo = emailInserido.toLowerCase();
-    let resposta = `E-mail válido.`;
+    let resposta = '';
 
 
     if (emailInserido == '') {
@@ -48,8 +49,6 @@ function validarEmail() {
             }
         }
     }
-
-
     div_verificarEmail.innerHTML = resposta;
 }
 
@@ -57,7 +56,7 @@ function validarEmail() {
 function verificarNome() {
     let nomeInserido = ipt_nome.value;
     let nomeMinusculo = nomeInserido.toLowerCase();
-    let resposta = `Nome válido`
+    let resposta = '';
     let valido = true;
     let caracteresPermitidos = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
         'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '];
@@ -95,7 +94,7 @@ function verificarNome() {
 function verificarSenha() {
     let senhaInserida = ipt_senha.value;
     let caracteresEspeciais = ['!', '@', '#', '$', '%', '&', '*', '_', '+', '=', '-', '{', '}', '<', '>', ']', '[']
-    let resposta = `Senha válida`;
+    let resposta = '';
 
     if (senhaInserida == '') {
         resposta = `Por favor, preencha o campo de senha.`
@@ -140,13 +139,8 @@ function verificarSenha() {
 }
 
 function cadastrar() {
-    let email = ipt_email.value;
-    let senha = ipt_senha.value;
-    let nome = ipt_nome.value;
-
-    if (nome == '' || senha == '' || nome == '') {
-        /* divNome.innerHTML += `<span> Insira um nome válido</span>`*/
-        alert(`Por favor, preencha todos os campos para prosseguir.`) 
+    if (nomeFinal == '' || senhaFinal == '' || nomeFinal == '') {
+        alert(`Por favor, preencha todos os campos corretamente para prosseguir.`) 
     } else {
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -154,9 +148,9 @@ function cadastrar() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nomeServer: nome,
-                emailServer: email,
-                senhaServer: senha
+                nomeServer: nomeFinal,
+                emailServer: emailFinal,
+                senhaServer: senhaFinal
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO CADASTRAR()!")
@@ -167,8 +161,8 @@ function cadastrar() {
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.EMAIL_USUARIO = json.emailFinal;
+                    sessionStorage.NOME_USUARIO = json.nomeFinal;
                     setTimeout(function () {
                         window.location = "login.html";
                     }, 1000); // apenas para exibir o loading
