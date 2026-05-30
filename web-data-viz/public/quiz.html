@@ -5,52 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/fav.webp" type="image/x-icon">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../css/quiz.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <title>Quiz | Bring Me The Horizon Brasil</title>
 </head>
 
 <body onload="iniciarQuiz()">
-    <header>
-        <a href="index.html">Sair</a>
-        <div id="header-links">
-            <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
-            <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i class="bi bi-spotify"></i></a>
-            <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
+    <div class="hero flex">
+        <header>
+            <div id="secoes">
+                <a href="dashboard/dashboard.html">DASHBOARD</a>
+                <a href="index.html">SAIR</a>
+            </div>
+            <div id="header-links">
+                <a href="https://x.com/bmthofficial"> <i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.youtube.com/BMTHchannel/videos"><i class="bi bi-play-btn-fill"></i></a>
+                <a href="https://open.spotify.com/intl-pt/artist/1Ffb6ejR6Fe5IamqA5oRUF"><i
+                        class="bi bi-spotify"></i></a>
+                <a href="https://www.instagram.com/bringmethehorizon/"><i class="bi bi-instagram"></i></a>
+            </div>
+        </header>
+        <div class="hero-content">
+            <h1>DESCUBRA QUAL ÁLBUM COMBINA COM VOCÊ</h1>
+            <p>Responda o quiz baixo e descubra qual álbum do Bring Me The Horizon mais combina com a sua personalidade.
+            </p>
         </div>
-    </header>
-    <div id="jogo" class="flex colunar">
-        <div id="infoTitulo">
-            <p>BRING ME THE HORIZON BRASIL - QUIZ</p>
-            <h1>Qual álbum do Bring Me The Horizon mais combina com você?</h1>
-            <span id="perguntas_restantes">Perguntas restantes:</span>
-        </div>
-        <div>
+    </div>
+    <div class="tela-inteira flex container-jogo">
+        <div class="flex colunar jogo">
+            <div id="infoTitulo">
+                <span id="perguntas_restantes">Perguntas restantes:</span>
+            </div>
+
             <div id="infoQuestao">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
             </div>
             <div id="perguntaDaQuestaoAtual">
-                <span id="spanQuestaoExibida"></span>
+                <b><span id="spanQuestaoExibida"></span></b>
             </div>
             <div id="infoAlternativas">
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
-            <div id="div_alternativas">
+            <div id="div_alternativas" class="alternativas">
             </div>
-            <div id="botoes">
-                <button onclick="submeter()" id="btnSubmeter">Submeter</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar</button>
+            <div class="flex colunar btn-quiz">
+                <button onclick="submeter()" id="btnSubmeter" class="btn-avancar">Submeter</button>
+                <button onclick="avancar()" id="btnProx" class="btn-avancar" disabled>Avançar</button>
             </div>
 
         </div>
     </div>
+    <footer class="flex">
+        2026 BRING ME THE HORIZON BRASIL
+    </footer>
 </body>
 
 </html>
 <script>
-    // Declaração de variáveis de álbuns
+    // Declaração de pontuação de albuns
     let pontuacaoAlbuns = {
         sempiternal: 0,
         amo: 0,
@@ -84,7 +97,7 @@
                     perfil: "melancolico"
                 },
                 {
-                    texto: "Grunge",
+                    texto: "Minimalismo",
                     album1: "sempiternal",
                     album2: "thatsTheSpirit",
                     album3: "amo",
@@ -98,7 +111,7 @@
             ]
         },
         {
-            pergunta: "O que mais prende sua atenção?",
+            pergunta: "Qual assunto mais prende sua atenção?",
             alternativas: [
                 {
                     texto: "Tecnologia",
@@ -106,7 +119,7 @@
                     perfil: "animado"
                 },
                 {
-                    texto: "Surrealismo",
+                    texto: "Espiritualismo",
                     album1: "thereIsAHell",
                     perfil: "melancolico"
                 },
@@ -197,7 +210,10 @@
         div_alternativas.innerHTML = "";
 
         for (let i = 0; i < questaoAtual.alternativas.length; i++) {
-            div_alternativas.innerHTML += ` <button id="botao${i}" onclick="selecionar(${i})">
+            div_alternativas.innerHTML += ` <button id="botao${i}" onclick="selecionar(${i})" class="alternativa" style="
+        background-image: url('${questaoAtual.alternativas[i].imagem}');
+    ">
+    
             ${questaoAtual.alternativas[i].texto} </button>
     `;
         }
@@ -292,14 +308,9 @@
         }
         let fkUsuario = sessionStorage.ID_USUARIO;
 
-        document.getElementById('jogo').style.display = "none"
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
-
-        console.log(fkUsuario);
-        console.log(albumMaisVotado);
-        console.log(perfilResultado);
 
         fetch("/dashboard/enviarQuiz", {
             method: "POST",
@@ -309,7 +320,14 @@
             body: JSON.stringify({
                 fkUsuarioServer: fkUsuario,
                 nomeAlbumServer: albumMaisVotado,
-                perfilServer: perfilResultado
+                perfilServer: perfilResultado,
+
+                sempiternalServer: pontuacaoAlbuns.sempiternal,
+                amoServer: pontuacaoAlbuns.amo,
+                survivalHorrorServer: pontuacaoAlbuns.survivalHorror,
+                thereIsAHellServer: pontuacaoAlbuns.thereIsAHell,
+                thatsTheSpiritServer: pontuacaoAlbuns.thatsTheSpirit,
+                nexGenServer: pontuacaoAlbuns.nexGen
             })
         }).then(resposta => {
             console.log('Quiz salvo');
