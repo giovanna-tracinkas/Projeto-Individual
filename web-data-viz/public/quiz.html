@@ -109,7 +109,7 @@
                     perfil: "animado"
                 },
             ]
-        },
+        }, 
         {
             pergunta: "Qual assunto mais prende sua atenção?",
             alternativas: [
@@ -210,10 +210,7 @@
         div_alternativas.innerHTML = "";
 
         for (let i = 0; i < questaoAtual.alternativas.length; i++) {
-            div_alternativas.innerHTML += ` <button id="botao${i}" onclick="selecionar(${i})" class="alternativa" style="
-        background-image: url('${questaoAtual.alternativas[i].imagem}');
-    ">
-    
+            div_alternativas.innerHTML += ` <button id="botao${i}" onclick="selecionar(${i})" class="alternativa";>
             ${questaoAtual.alternativas[i].texto} </button>
     `;
         }
@@ -321,13 +318,15 @@
                 fkUsuarioServer: fkUsuario,
                 nomeAlbumServer: albumMaisVotado,
                 perfilServer: perfilResultado,
-
                 sempiternalServer: pontuacaoAlbuns.sempiternal,
                 amoServer: pontuacaoAlbuns.amo,
                 survivalHorrorServer: pontuacaoAlbuns.survivalHorror,
                 thereIsAHellServer: pontuacaoAlbuns.thereIsAHell,
                 thatsTheSpiritServer: pontuacaoAlbuns.thatsTheSpirit,
-                nexGenServer: pontuacaoAlbuns.nexGen
+                nexGenServer: pontuacaoAlbuns.nexGen,
+                melancolicoServer: melancolico,
+                animadoServer: animado,
+                ansiosoServer: ansioso
             })
         }).then(resposta => {
             console.log('Quiz salvo');

@@ -305,6 +305,7 @@ i button {
     display: flex;
     height: 15%;
     gap: 25px;
+    margin-top: 8px;
 }
 
 .kpi {
